@@ -1,6 +1,9 @@
 # clojure_hotel
 
+![](https://github.com/afucher/clojure-hotel/workflows/Clojure%20CI/badge.svg)
+
 Repository used to learn Clojure
+
 
 ## License
 
