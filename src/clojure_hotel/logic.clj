@@ -27,3 +27,15 @@
         :reward
         :weekend
         (* dias)))
+
+(defn total-para-normal
+    [estadia hotel]
+    (let  [ total-week (total-para-semana-normal (get estadia :week 0) hotel)
+            total-weekend (total-para-fds-normal (get estadia :weekend 0) hotel)]
+    (+ total-week total-weekend)))
+
+(defn total-para-reward
+  [estadia hotel]
+  (let  [ total-week (total-para-semana-reward (get estadia :week 0) hotel)
+          total-weekend (total-para-fds-reward (get estadia :weekend 0) hotel)]
+  (+ total-week total-weekend)))
