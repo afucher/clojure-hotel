@@ -1,32 +1,27 @@
 (ns clojure-hotel.logic)
 
+(defn total-de-diarias
+    [dias hotel tipo-cliente tipo-dia]
+    (->> hotel
+        tipo-cliente
+        tipo-dia
+        (* dias)))
+
 (defn total-para-semana-normal
     [dias hotel]
-    (->> hotel
-        :regular
-        :week
-        (* dias)))
+    (total-de-diarias dias hotel :regular :week))
 
 (defn total-para-fds-normal
     [dias hotel]
-    (->> hotel
-        :regular
-        :weekend
-        (* dias)))
+    (total-de-diarias dias hotel :regular :weekend))
 
 (defn total-para-semana-reward
     [dias hotel]
-    (->> hotel
-        :reward
-        :week
-        (* dias)))
+    (total-de-diarias dias hotel :reward :week))
 
 (defn total-para-fds-reward
     [dias hotel]
-    (->> hotel
-        :reward
-        :weekend
-        (* dias)))
+    (total-de-diarias dias hotel :reward :weekend))
 
 (defn total-para-normal
     [estadia hotel]
