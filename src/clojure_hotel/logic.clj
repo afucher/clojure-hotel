@@ -34,3 +34,20 @@
   (let  [ total-week (total-para-semana-reward (get estadia :week 0) hotel)
           total-weekend (total-para-fds-reward (get estadia :weekend 0) hotel)]
   (+ total-week total-weekend)))
+
+(defn eh-melhor? 
+  [primeira-opcao segunda-opcao]
+  (< (:valor primeira-opcao) (:valor segunda-opcao)))
+
+(defn melhor-hotel-reward
+  [hoteis estadia]
+  (->> hoteis
+    (map (fn [hotel] {:hotel hotel :valor (total-para-reward estadia hotel)}))
+    (reduce (fn [prev, curr] (if (eh-melhor? prev curr)
+      prev
+      curr)))
+    :hotel))
+  
+
+
+
