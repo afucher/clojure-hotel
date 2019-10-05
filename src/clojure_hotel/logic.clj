@@ -39,13 +39,21 @@
   [primeira-opcao segunda-opcao]
   (< (:valor primeira-opcao) (:valor segunda-opcao)))
 
+(defn- melhor-opcao
+  [primeira-opcao segunda-opcao]
+  (if (eh-melhor? primeira-opcao segunda-opcao)
+    primeira-opcao
+    segunda-opcao))
+
+(defn- valor-estadia
+  [estadia hotel]
+  {:hotel hotel :valor (total-para-reward estadia hotel)})
+
 (defn melhor-hotel-reward
   [hoteis estadia]
   (->> hoteis
-    (map (fn [hotel] {:hotel hotel :valor (total-para-reward estadia hotel)}))
-    (reduce (fn [prev, curr] (if (eh-melhor? prev curr)
-      prev
-      curr)))
+    (map valor-estadia estadia)
+    (reduce melhor-opcao)
     :hotel))
   
 
